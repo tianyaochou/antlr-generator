@@ -1,0 +1,21 @@
+#include <iostream>
+#include <string>
+#include "antlr4-runtime.h"
+#include "ANTLRv4Lexer.h"
+#include "ANTLRv4Parser.h"
+
+using namespace antlr4;
+
+int main(int argc, char *argv[]) {
+    
+    std::string filename("../../tests/Hello.g4");
+    ANTLRFileStream stream(filename);
+    ANTLRv4Lexer lexer(&stream);
+    CommonTokenStream tokens(&lexer);
+    ANTLRv4Parser parser(&tokens);
+
+    tree::ParseTree *tree = parser.grammarSpec();
+    std::cout << tree->toStringTree() << std::endl;
+
+    return 0;
+}
